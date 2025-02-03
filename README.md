@@ -17,42 +17,49 @@ The Azure Hybrid Application Proxy project aims to create a highly scalable and 
 # Deploy Azure App Service
 ```
 #!/bin/bash
-#az login --use-device-code
 
 # Define variables
 subscriptionId="your-subscription-id"
-resourceGroupName="your-resource-group-name"
 webAppName="hybrid-proxy"
-appServicePlan="${webAppName}-appplan"
+resourceGroupName="${webAppName}-rg"
+appServicePlan="${webAppName}plan"
 containerImage="mafamafa/nginx-container-proxy:202502022107"
 SKU="B1"
+location="your-desired-location"
 
 # Set the active subscription
 az account set --subscription "$subscriptionId"
 
+# Create the resource group
+az group create \
+  --name "$resourceGroupName" \
+  --location "$location"
+
 # Create the App Service plan
 az appservice plan create \
- --name "$appServicePlan" \
- --resource-group "$resourceGroupName" \
- --sku "$SKU" \
- --is-linux
+  --name "$appServicePlan" \
+  --resource-group "$resourceGroupName" \
+  --sku "$SKU" \
+  --is-linux \
+  --location "$location"
 
 # Create the Web App
 az webapp create \
- --resource-group "$resourceGroupName" \
- --plan "$appServicePlan" \
- --name "${webAppName}-appservice" \
- --deployment-container-image-name "$containerImage"
+  --resource-group "$resourceGroupName" \
+  --plan "$appServicePlan" \
+  --name "${webAppName}-appservice" \
+  --deployment-container-image-name "$containerImage" \
+  --location "$location"
 ```
 
 # Set environment variables for the Web App - this is the destination address
 ```
 az webapp config appsettings set \
- --resource-group "$resourceGroupName" \
- --name "${webAppName}-appservice" \
- --settings \
-   DEFAULT_OVERRIDE_HOST=emailmarketing.fast-sms.net \
-   DEFAULT_OVERRIDE_PORT=80 \
-   DEFAULT_OVERRIDE_PROTOCOL=http \
-   DEFAULT_OVERRIDE_IP=93.157.100.46
+  --resource-group "$resourceGroupName" \
+  --name "${webAppName}-appservice" \
+  --settings \
+    DEFAULT_OVERRIDE_HOST=emailmarketing.fast-sms.net \
+    DEFAULT_OVERRIDE_PORT=80 \
+    DEFAULT_OVERRIDE_PROTOCOL=http \
+    DEFAULT_OVERRIDE_IP=93.157.100.46
 ```
