@@ -23,7 +23,7 @@ The Azure Hybrid Application Proxy project aims to create a highly scalable and 
 subscriptionId="your-subscription-id"
 resourceGroupName="your-resource-group-name"
 webAppName="hybrid-proxy"
-appServicePlan="${webAppName}plan"
+appServicePlan="${webAppName}-appplan"
 containerImage="mafamafa/nginx-container-proxy:202502022107"
 SKU="B1"
 
