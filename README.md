@@ -22,15 +22,34 @@ The Azure Hybrid Application Proxy project aims to create a highly scalable and 
 subscriptionId="your-subscription-id"
 resourceGroupName="your-resource-group-name"
 webAppName="hybrid-proxy"
-appServicePlan=$webAppName+"plan"
+appServicePlan="${webAppName}plan"
 containerImage="mafamafa/nginx-container-proxy:202502022107"
 SKU="B1"
+
 # Set the active subscription
-az account set --subscription $subscriptionId
+az account set --subscription "$subscriptionId"
 
 # Create the App Service plan
-az appservice plan create --name $appServicePlan --resource-group $resourceGroupName --sku $SKU --is-linux
+az appservice plan create \
+ --name "$appServicePlan" \
+ --resource-group "$resourceGroupName" \
+ --sku "$SKU" \
+ --is-linux
 
 # Create the Web App
-az webapp create --resource-group $resourceGroupName --plan $appServicePlan --name "$webAppName-appservice" --deployment-container-image-name $containerImage
+az webapp create \
+ --resource-group "$resourceGroupName" \
+ --plan "$appServicePlan" \
+ --name "${webAppName}-appservice" \
+ --deployment-container-image-name "$containerImage"
+
+# Set environment variables for the Web App
+az webapp config appsettings set \
+ --resource-group "$resourceGroupName" \
+ --name "${webAppName}-appservice" \
+ --settings \
+   DEFAULT_OVERRIDE_HOST=emailmarketing.fast-sms.net \
+   DEFAULT_OVERRIDE_PORT=80 \
+   DEFAULT_OVERRIDE_PROTOCOL=http \
+   DEFAULT_OVERRIDE_IP=93.157.100.46
 ```
