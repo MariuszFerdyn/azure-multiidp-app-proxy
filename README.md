@@ -13,3 +13,24 @@ The Azure Hybrid Application Proxy project aims to create a highly scalable and 
 5. **Pure Reverse Proxy**: Act as a pure reverse proxy solution, securely relaying authenticated requests to backend applications. The proxy itself will not implement any application logic.
 
 6. **NGINX-based Ingress Controller**: Utilize the well-known Ingress Controller based on NGINX to handle incoming traffic, load balancing, and routing requests to the appropriate backend services.
+
+# Deploy Azure App Service
+```
+#!/bin/bash
+
+# Define variables
+subscriptionId="your-subscription-id"
+resourceGroupName="your-resource-group-name"
+webAppName="hybrid-proxy"
+appServicePlan=$webAppName+"plan"
+containerImage="mafamafa/nginx-container-proxy:202502022107"
+SKU="B1"
+# Set the active subscription
+az account set --subscription $subscriptionId
+
+# Create the App Service plan
+az appservice plan create --name $appServicePlan --resource-group $resourceGroupName --sku $SKU --is-linux
+
+# Create the Web App
+az webapp create --resource-group $resourceGroupName --plan $appServicePlan --name "$webAppName-appservice" --deployment-container-image-name $containerImage
+```
