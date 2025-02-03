@@ -49,8 +49,7 @@ az webapp create \
   --resource-group "$resourceGroupName" \
   --plan "$appServicePlan" \
   --name "${webAppName}-appservice" \
-  --deployment-container-image-name "$containerImage" \
-  --location "$location"
+  --deployment-container-image-name "$containerImage"
 ```
 
 # Set environment variables for the Web App - this is the destination address
