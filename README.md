@@ -17,6 +17,7 @@ The Azure Hybrid Application Proxy project aims to create a highly scalable and 
 # Deploy Azure App Service
 ```
 #!/bin/bash
+##az login #--use-device-code
 
 # Define variables
 subscriptionId="your-subscription-id"
