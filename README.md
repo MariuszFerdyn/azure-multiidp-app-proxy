@@ -89,3 +89,15 @@ az vm extension set \
     "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File Install_IIS_and_SamplePages.ps1"
   }'
 ```
+# Create Hybrid connection
+1. Open created App Service
+2. Go to Networking
+3. Click Hybrid connections
+4. Click Create new hybrid connection as follow and click ok:
+5. Open the newly crated connection and copy the Gateway Connection String
+5. Log in using RDP to the machine and install the agent from: https://go.microsoft.com/fwlink/?linkid=841308
+6. Launch the Hybrid Connection Manager UI
+7. Click Enter Manually and put the copied Gateway Connection string
+8. Click refresh it should be connected
+
+** Project fail - containers in web apps do not support hybrid connection **
