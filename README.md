@@ -99,7 +99,7 @@ az vm extension set \
 5. Open the newly created connection and copy the Gateway Connection String
    ![Copy Gateway Connection String](media/hybrid-point5.jpg)
 6. Log in using RDP to the machine and install the agent from: https://go.microsoft.com/fwlink/?linkid=841308 </br>
-7. Launch the Hybrid Connection Manager UI
+7. Launch the Hybrid Connection Manager UI</br>
    ![Launch Hybrid Connection Manager UI](media/hybrid-point6.jpg)
 8. Click Enter Manually and put the copied Gateway Connection string
    ![Enter Gateway Connection string](media/hybrid-point7.jpg)
