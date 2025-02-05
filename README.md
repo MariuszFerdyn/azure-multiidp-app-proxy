@@ -100,3 +100,13 @@ az vm extension set \
 7. Click Enter Manually and put the copied Gateway Connection string
 8. Click refresh it should be connected
 9. If it is not connected issue in PowerShell ```restart-service HybridConnectionManager```
+## Debug
+Check if the connection is working using bash in AppService (KUDU) like: https://hybrid-proxy-appservice.scm.azurewebsites.net/DebugConsole.
+issue: ```curl http://hybrid-proxy-vm```
+the expected output:
+```
+            <h1>Welcome to IIS Demo Site</h1>
+        </div>
+        <p>Welcome to our IIS demonstration website. This site showcases various features and capabilities of Internet Information Services (IIS).</p>
+        <p>Feel free to explore different sections using the navigation menu above. Each page demonstrates different aspects of web hosting and server capabilities.</p>
+```
