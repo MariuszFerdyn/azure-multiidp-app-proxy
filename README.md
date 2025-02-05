@@ -24,7 +24,7 @@ subscriptionId="your-subscription-id"
 webAppName="hybrid-proxy"
 resourceGroupName="${webAppName}-rg"
 appServicePlan="${webAppName}plan"
-containerImage="docker.io/mafamafa/nginx-container-proxy:202502022107"
+containerImage="docker.io/mafamafa/nginx-container-proxy:202502051357"
 SKU="B1"
 location="your-desired-location"
 
