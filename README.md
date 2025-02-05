@@ -129,4 +129,6 @@ az webapp config appsettings set \
     DEFAULT_OVERRIDE_IP=hybrid-proxy-vm
 ```
 ## Test the connection - browsing your WebApp site
-e.g.: 
+e.g.: https://hybrid-proxy-appservice.azurewebsites.net/
+
+If something not working use DEFAULT_OVERRIDE_IP as IP like DEFAULT_OVERRIDE_IP=127.0.0.14.
