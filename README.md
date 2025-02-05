@@ -76,3 +76,16 @@ az vm create --resource-group $resourceGroupName \
     --public-ip-sku Standard \
     --admin-username $adminUsername --admin-password $adminPassword --size $vmSize --location $location
 ```
+## Install IIS and Sample Pages on VM
+```
+az vm extension set \
+  --resource-group $resourceGroupName \
+  --vm-name "${webAppName}-vm" \
+  --name CustomScriptExtension \
+  --publisher Microsoft.Compute \
+  --version 1.10 \
+  --settings '{
+    "fileUris": ["https://raw.githubusercontent.com/MariuszFerdyn/azure-multiidp-app-proxy/refs/heads/main/scripts/Install_IIS_and_SamplePages.ps1"],
+    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File Install_IIS_and_SamplePages.ps1"
+  }'
+```
