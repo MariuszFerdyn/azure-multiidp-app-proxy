@@ -99,12 +99,12 @@ az vm extension set \
 5. Open the newly created connection and copy the Gateway Connection String
    ![Copy Gateway Connection String](media/hybrid-point5.jpg)
 6. Log in using RDP to the machine and install the agent from: https://go.microsoft.com/fwlink/?linkid=841308
-   ![Install the agent](media/hybrid-point6.jpg)
 7. Launch the Hybrid Connection Manager UI
-   ![Launch Hybrid Connection Manager UI](media/hybrid-point7.jpg)
+   ![Launch Hybrid Connection Manager UI](media/hybrid-point6.jpg)
 8. Click Enter Manually and put the copied Gateway Connection string
-   ![Enter Gateway Connection string](hybrid-point8.jpg)
+   ![Enter Gateway Connection string](hybrid-point7.jpg)
 9. Click refresh it should be connected
+   ![Connected](hybrid-point9.jpg)
 10. If it is not connected issue in PowerShell ```restart-service HybridConnectionManager```
 ## Debug
 Check if the connection is working using bash in AppService (KUDU) like: https://hybrid-proxy-appservice.scm.azurewebsites.net/DebugConsole.
