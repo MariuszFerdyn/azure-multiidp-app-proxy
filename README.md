@@ -145,3 +145,7 @@ If something is not working, use DEFAULT_OVERRIDE_IP as IP like DEFAULT_OVERRIDE
 - Autoscaling for peak performance is live.
 - Flexible Identity Provider Support: Simply authenticate against Entra ID and many other identity providers.
 - Even publish the site on the internet from your laptop.
+# Coming soon
+- Version for Container Apps
+- WAF from ModSecurity
+- Header-based single sign-on must be configured on your own via modification of template files: https://github.com/MariuszFerdyn/nginx-container-proxy/tree/main/config
