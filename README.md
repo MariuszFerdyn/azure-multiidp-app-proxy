@@ -123,7 +123,7 @@ Name:   hybrid-proxy-vm
 Address: 127.0.0.14
 ```
 Note the IP address.
-# Corect the enviorment variables that point to Hybrid connection
+# Correct the environment variables that point to the Hybrid connection
 ```
 az webapp config appsettings set \
   --resource-group "$resourceGroupName" \
@@ -137,4 +137,9 @@ az webapp config appsettings set \
 ## Test the connection - browsing your WebApp site
 e.g.: https://hybrid-proxy-appservice.azurewebsites.net/
 
-If something not working use DEFAULT_OVERRIDE_IP as IP like DEFAULT_OVERRIDE_IP=127.0.0.14.
+If something is not working, use DEFAULT_OVERRIDE_IP as IP like DEFAULT_OVERRIDE_IP=127.0.0.14.
+# Enjoy App Service Features
+- SSL Offloading is fully operational.
+- Autoscaling for peak performance is live.
+- Flexible Identity Provider Support: Simply authenticate against Entra ID and many other identity providers.
+- Even publish the site on the internet from your laptop.
