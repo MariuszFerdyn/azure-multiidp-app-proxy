@@ -63,3 +63,16 @@ az webapp config appsettings set \
     DEFAULT_OVERRIDE_PROTOCOL=http \
     DEFAULT_OVERRIDE_IP=93.157.100.46
 ```
+At this moment you can browese the site and it will be proxied to the sample my old site.
+
+# Install the Windows VM for test purpose
+```
+adminUsername="adminuser"
+adminPassword="YourPassword123!"
+vmSize="Standard_B2s"
+az vm create --resource-group $resourceGroupName \
+    --name "${webAppName}-vm" \
+    --image Win2019Datacenter \
+    --public-ip-sku Standard \
+    --admin-username $adminUsername --admin-password $adminPassword --size $vmSize --location $location
+```
