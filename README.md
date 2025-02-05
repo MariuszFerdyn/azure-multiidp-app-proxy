@@ -51,7 +51,7 @@ az webapp create \
   --name "${webAppName}-appservice" \
   --deployment-container-image-name "$containerImage"
 ```
-Web app listening on 8080.
+TODO: Web app listening on 8080 - config need to be fixed.
 
 # Set environment variables for the Web App - this is the destination address
 ```
