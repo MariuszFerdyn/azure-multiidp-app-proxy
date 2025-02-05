@@ -110,3 +110,23 @@ the expected output:
         <p>Welcome to our IIS demonstration website. This site showcases various features and capabilities of Internet Information Services (IIS).</p>
         <p>Feel free to explore different sections using the navigation menu above. Each page demonstrates different aspects of web hosting and server capabilities.</p>
 ```
+Issue: ```nslookup hybrid-proxy-vm```
+the expected ouput:
+```
+Name:   hybrid-proxy-vm
+Address: 127.0.0.14
+```
+Note the IP address.
+# Corect the enviorment variables that point to Hybrid connection
+```
+az webapp config appsettings set \
+  --resource-group "$resourceGroupName" \
+  --name "${webAppName}-appservice" \
+  --settings \
+    DEFAULT_OVERRIDE_HOST=hybrid-proxy-vm \
+    DEFAULT_OVERRIDE_PORT=80 \
+    DEFAULT_OVERRIDE_PROTOCOL=http \
+    DEFAULT_OVERRIDE_IP=hybrid-proxy-vm
+```
+## Test the connection - browsing your WebApp site
+e.g.: 
