@@ -95,12 +95,17 @@ az vm extension set \
 2. Go to Networking
 3. Click Hybrid connections
 4. Click Create new hybrid connection as follow and click ok:
-5. Open the newly crated connection and copy the Gateway Connection String
-5. Log in using RDP to the machine and install the agent from: https://go.microsoft.com/fwlink/?linkid=841308
-6. Launch the Hybrid Connection Manager UI
-7. Click Enter Manually and put the copied Gateway Connection string
-8. Click refresh it should be connected
-9. If it is not connected issue in PowerShell ```restart-service HybridConnectionManager```
+   ![Create new hybrid connection](media/hybrid-point4.jpg)
+5. Open the newly created connection and copy the Gateway Connection String
+   ![Copy Gateway Connection String](media/hybrid-point5.jpg)
+6. Log in using RDP to the machine and install the agent from: https://go.microsoft.com/fwlink/?linkid=841308
+   ![Install the agent](media/hybrid-point6.jpg)
+7. Launch the Hybrid Connection Manager UI
+   ![Launch Hybrid Connection Manager UI](media/hybrid-point7.jpg)
+8. Click Enter Manually and put the copied Gateway Connection string
+   ![Enter Gateway Connection string](hybrid-point8.jpg)
+9. Click refresh it should be connected
+10. If it is not connected issue in PowerShell ```restart-service HybridConnectionManager```
 ## Debug
 Check if the connection is working using bash in AppService (KUDU) like: https://hybrid-proxy-appservice.scm.azurewebsites.net/DebugConsole.
 issue: ```curl http://hybrid-proxy-vm```
