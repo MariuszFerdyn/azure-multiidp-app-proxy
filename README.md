@@ -102,9 +102,9 @@ az vm extension set \
 7. Launch the Hybrid Connection Manager UI
    ![Launch Hybrid Connection Manager UI](media/hybrid-point6.jpg)
 8. Click Enter Manually and put the copied Gateway Connection string
-   ![Enter Gateway Connection string](hybrid-point7.jpg)
+   ![Enter Gateway Connection string](media/hybrid-point7.jpg)
 9. Click refresh it should be connected
-   ![Connected](hybrid-point9.jpg)
+   ![Connected](media/hybrid-point9.jpg)
 10. If it is not connected issue in PowerShell ```restart-service HybridConnectionManager```
 ## Debug
 Check if the connection is working using bash in AppService (KUDU) like: https://hybrid-proxy-appservice.scm.azurewebsites.net/DebugConsole.
