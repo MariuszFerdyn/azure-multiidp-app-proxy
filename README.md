@@ -100,4 +100,4 @@ az vm extension set \
 7. Click Enter Manually and put the copied Gateway Connection string
 8. Click refresh it should be connected
 
-** Project fail - containers in web apps do not support hybrid connection **
+**Project fail - containers in web apps do not support hybrid connection**
