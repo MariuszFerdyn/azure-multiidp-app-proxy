@@ -99,5 +99,4 @@ az vm extension set \
 6. Launch the Hybrid Connection Manager UI
 7. Click Enter Manually and put the copied Gateway Connection string
 8. Click refresh it should be connected
-
-**Project fail - containers in web apps do not support hybrid connection**
+9. If it is not connected issue in PowerShell ```restart-service HybridConnectionManager```
