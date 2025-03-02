@@ -149,3 +149,66 @@ If something is not working, use DEFAULT_OVERRIDE_IP as IP like DEFAULT_OVERRIDE
 - Version for Container Apps
 - WAF from ModSecurity
 - Header-based single sign-on must be configured on your own via modification of template files: https://github.com/MariuszFerdyn/nginx-container-proxy/tree/main/config
+# Probelms
+## Performance
+
+If you see performance problems cosider run multiple containers inside Azure App Service. There is no replica statement, so for each you need to create the App Service Slots and distribute trafic, like here:
+```
+echo "Creating 7 deployment slots for $webAppName in $resourceGroupName..."
+
+# Create 7 deployment slots
+for i in {1..7}
+do
+  echo "Creating slot${i}..."
+  az webapp deployment slot create \
+    --name $webAppName \
+    --resource-group $resourceGroupName \
+    --slot "slot${i}" \
+    --configuration-source $webAppName
+  
+
+  echo "Slot${i} created successfully"
+done
+
+# Calculate percentage per slot (8 slots total including production)
+TOTAL_SLOTS=8
+PERCENT_PER_SLOT=$((100 / TOTAL_SLOTS))
+REMAINING=$((100 - (PERCENT_PER_SLOT * TOTAL_SLOTS)))
+
+# Build a single distribution string with correct syntax (comma-separated with full slot names)
+echo "Setting up traffic distribution..."
+
+# Initialize distribution string with non-production slots
+DISTRIBUTION=""
+for i in {1..7}
+do
+  # Add comma before subsequent slots
+  if [ "$DISTRIBUTION" != "" ]; then
+    DISTRIBUTION="$DISTRIBUTION,"
+  fi
+  
+  # Use full slot name: webAppName-slotN
+  FULL_SLOT_NAME="${webAppName}-slot${i}"
+  DISTRIBUTION="${DISTRIBUTION}${FULL_SLOT_NAME}=${PERCENT_PER_SLOT}"
+done
+
+echo "Setting traffic distribution: $DISTRIBUTION"
+echo "Note: Remaining traffic (${REMAINING}%) will automatically go to the production slot"
+
+# Configure traffic routing with a single command
+# Any unallocated percentage automatically goes to production
+az webapp traffic-routing set \
+  --name $webAppName \
+  --resource-group $resourceGroupName \
+  --distribution "$DISTRIBUTION"
+
+echo "Traffic splitting has been configured successfully!"
+echo "Each slot (including production) receives approximately $PERCENT_PER_SLOT% of traffic."
+echo "You can monitor traffic in the Azure Portal under App Service > Deployment Slots > Traffic %"
+
+# Show the current distribution
+echo "Current traffic distribution:"
+az webapp traffic-routing show \
+  --name $webAppName \
+  --resource-group $resourceGroupName
+```
