@@ -10,6 +10,8 @@ resourceGroup="${rely}-rg"
 relay="${rely}relay"
 location="your-desired-location"
 $subscriptionId="your-subscryption-id"
+$Enviorment="ContainerAppProxy"
+
 
 # Set the active subscription
 az account set --subscription $subscriptionId
@@ -29,10 +31,6 @@ az relay hyco authorization-rule keys list --hybrid-connection-name db --namespa
 
 # Crate the Container Apps
 ```
-$ResourceGroup="${{ vars.ResourceGroup }}"
-$location="${{ vars.Location }}"
-        $Enviorment="worpress-containerapps"
-
 # Prepare env
 az extension add --name containerapp --upgrade --allow-preview true
 az provider register --namespace Microsoft.App
