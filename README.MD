@@ -15,3 +15,5 @@ The Azure Hybrid Application Proxy project aims to create a highly scalable and 
 6. **NGINX-based Ingress Controller**: Utilize the well-known Ingress Controller based on NGINX to handle incoming traffic, load balancing, and routing requests to the appropriate backend services.
 
 The solution uses nginx-container-proxy: https://github.com/MariuszFerdyn/nginx-container-proxy
+
+You can deploy the solution using [AppService](AppService.md) or with [Container Apps](ContainerApp.MD). Container Apps give you a performance boost.
