@@ -4,7 +4,6 @@
 ##az login #--use-device-code
 
 # Define variables
-subscriptionId="your-subscription-id"
 rely="app-proxy"
 resourceGroup="${rely}-rg"
 relay="${rely}relay"
