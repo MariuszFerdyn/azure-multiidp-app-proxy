@@ -23,7 +23,7 @@ az relay namespace create -g $resourceGroup --name $relay --location $location
 az relay hyco create -g $resourceGroup --namespace-name $relay --name db
 
 # Create the secrets
-az relay hyco authorization-rule create -g $resourceGroup --hybrid-connection-name db --namespace-name $relay -n root --rights Send,Listen
+az relay hyco authorization-rule create -g $resourceGroup --hybrid-connection-name db --namespace-name $relay -n root --rights Send Listen
 
 az relay hyco authorization-rule keys list --hybrid-connection-name db --namespace-name $relay -g $resourceGroup -n root
 ```
