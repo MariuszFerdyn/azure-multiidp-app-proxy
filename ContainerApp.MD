@@ -8,8 +8,8 @@ rely="app-proxy"
 resourceGroup="${rely}-rg"
 relay="${rely}relay"
 location="your-desired-location"
-$subscriptionId="your-subscryption-id"
-$Enviorment="ContainerAppProxy"
+subscriptionId="your-subscryption-id"
+Enviorment="ContainerAppProxy"
 
 
 # Set the active subscription
