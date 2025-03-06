@@ -1,5 +1,4 @@
 version: '3'
-
 services:
    appproxy:
      depends_on:
@@ -12,13 +11,11 @@ services:
        DEFAULT_OVERRIDE_PORT: 80
        DEFAULT_OVERRIDE_PROTOCOL: http
        DEFAULT_OVERRIDE_IP: azbridge
-       
-  azbridge:
-    image: mafamafa/azbridge:0.15
-    container_name: azbridge-proxy
-    ports:
-      - "8181:8181"
-    command: >
-      -L 0.0.0.0:8181/http2:db
-      -x "Endpoint=xxxzzzzyyyy"
-
+   azbridge:
+     image: mafamafa/azbridge:0.15
+     container_name: azbridge-proxy
+     ports:
+       - "8181:8181"
+     command: >
+       -L 0.0.0.0:8181/http2:db
+       -x "Connection_String"
