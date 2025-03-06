@@ -21,7 +21,7 @@ az group create --name $resourceGroup --location $location
 az relay namespace create -g $resourceGroup --name $relay --location $location
 # create the hybrid connection endpoint 'db'
 az relay hyco create -g $resourceGroup --namespace-name $relay --name db
-# grant the current user "owner" permission
+
 # Create the secrets
 az relay hyco authorization-rule create -g $resourceGroup --hybrid-connection-name db --namespace-name $relay -n root --rights Send,Listen
 
