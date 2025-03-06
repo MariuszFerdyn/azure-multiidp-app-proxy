@@ -87,6 +87,6 @@ az containerapp env create --name $Enviorment --resource-group $resourceGroup --
 az containerapp compose create -g $resourceGroup --environment $Enviorment --compose-file-path "docker-compose-azure.yml"
 
 # you cannot configure the ingress controller in details for Azure Container Apps directly via a Docker Compose file. Instead, ingress settings must be configured using the Azure CLI.
-$CONTAINER_BRIDGE_NAME="azbridge"
-az containerapp ingress enable --name $$CONTAINER_BRIDGE_NAME --resource-group $resourceGroup --target-port 8181 --exposed-port 8181 --transport tcp --type internal
+az containerapp ingress enable --name azbridge --resource-group $resourceGroup --target-port 8181 --expos
+ed-port 8181 --transport tcp --type internal
 ```
