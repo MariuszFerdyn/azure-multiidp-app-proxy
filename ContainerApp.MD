@@ -81,12 +81,12 @@ az provider register --namespace Microsoft.App
 az provider register --namespace Microsoft.OperationalInsights
 
 # Create Container App Enviorment
-az containerapp env create --name $Enviorment --resource-group $ResourceGroup --location $location
+az containerapp env create --name $Enviorment --resource-group $resourceGroup --location $location
 
 # Create a container app by explicitly passing in a Compose configuration file.
-az containerapp compose create -g $ResourceGroup --environment $Enviorment --compose-file-path "docker-compose-azure.yml"
+az containerapp compose create -g $resourceGroup --environment $Enviorment --compose-file-path "docker-compose-azure.yml"
 
 # you cannot configure the ingress controller in details for Azure Container Apps directly via a Docker Compose file. Instead, ingress settings must be configured using the Azure CLI.
 $CONTAINER_PROXY_NAME="db007"
-az containerapp ingress enable --name $CONTAINER_PROXY_NAME --resource-group $ResourceGroup --target-port 8080 --exposed-port 8080 --transport tcp --type internal
+az containerapp ingress enable --name $CONTAINER_PROXY_NAME --resource-group $resourceGroup --target-port 8181 --exposed-port 8181 --transport tcp --type internal
 ```
