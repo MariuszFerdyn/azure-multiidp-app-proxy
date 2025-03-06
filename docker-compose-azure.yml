@@ -13,9 +13,6 @@ services:
        DEFAULT_OVERRIDE_IP: azbridge
    azbridge:
      image: mafamafa/azbridge:0.15
-     container_name: azbridge
      ports:
        - "8181:8181"
-     command: >
-       -L 0.0.0.0:8181/http2:db
-       -x "Connection_String"
+     command: [-L 0.0.0.0:8181/http2:db, -x "Connection_String"]
