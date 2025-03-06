@@ -74,6 +74,7 @@ azbridge -f .\server.config
 ```
 
 # Crate the Container Apps
+Modify docker-compose-azure.yml file according to the created Hybrid connection.
 ```
 # Prepare env
 az extension add --name containerapp --upgrade --allow-preview true
