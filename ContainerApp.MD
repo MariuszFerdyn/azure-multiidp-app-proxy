@@ -28,6 +28,50 @@ az relay hyco authorization-rule create -g $resourceGroup --hybrid-connection-na
 
 az relay hyco authorization-rule keys list --hybrid-connection-name db --namespace-name $relay -g $resourceGroup -n root
 ```
+# Install the Windows VM for test purpose
+```
+adminUsername="adminuser"
+adminPassword="YourPassword123!"
+vmSize="Standard_B2s"
+az vm create --resource-group $resourceGroupName \
+    --name "${webAppName}-vm" \
+    --image Win2019Datacenter \
+    --public-ip-sku Standard \
+    --admin-username $adminUsername --admin-password $adminPassword --size $vmSize --location $location
+```
+## Install IIS and Sample Pages on VM
+```
+az vm extension set \
+  --resource-group $resourceGroupName \
+  --vm-name "${webAppName}-vm" \
+  --name CustomScriptExtension \
+  --publisher Microsoft.Compute \
+  --version 1.10 \
+  --settings '{
+    "fileUris": ["https://raw.githubusercontent.com/MariuszFerdyn/azure-multiidp-app-proxy/refs/heads/main/scripts/Install_IIS_and_SamplePages.ps1"],
+    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File Install_IIS_and_SamplePages.ps1"
+  }'
+```
+## Install azbridge
+Install [https://github.com/Azure/azure-relay-bridge/releases - download unzip](https://github.com/Azure/azure-relay-bridge/releases)
+
+## On server machine with website
+create file with content server.config:
+```
+RemoteForward :
+   - RelayName: zzzz
+     Host: 127.0.0.1
+     PortName: http
+     HostPort: 3389
+     ConnectionString: Endpoint=sb://finalproxy.servicebus.windows.net/;SharedAccessKeyName=finalproxy;SharedAccessKey=xxxx=;EntityPath=yyyy
+
+LogLevel: INFO
+```
+## Start azbridge on the server
+Execute:
+```
+azbridge -f .\server.config
+```
 
 # Crate the Container Apps
 ```
