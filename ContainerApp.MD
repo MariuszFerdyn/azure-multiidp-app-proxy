@@ -61,7 +61,7 @@ RemoteForward :
    - RelayName: zzzz
      Host: 127.0.0.1
      PortName: http
-     HostPort: 3389
+     HostPort: 80
      ConnectionString: Endpoint=sb://finalproxy.servicebus.windows.net/;SharedAccessKeyName=finalproxy;SharedAccessKey=xxxx=;EntityPath=yyyy
 
 LogLevel: INFO
