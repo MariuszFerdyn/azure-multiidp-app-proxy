@@ -90,3 +90,13 @@ az containerapp compose create -g $resourceGroup --environment $Enviorment --com
 az containerapp ingress enable --name azbridge --resource-group $resourceGroup --target-port 8181 --expos
 ed-port 8181 --transport tcp --type internal
 ```
+
+# Enjoy Container App Features
+- Authentication with multiple IDP.
+- SSL Offloading is fully operational.
+- Autoscaling for peak performance is live. You can autoscale/scale up the containers for better performance.
+- Flexible Identity Provider Support: Simply authenticate against Entra ID and many other identity providers.
+- Even publish the site on the internet from your laptop.
+- Protect application with Azure Application Gateway with WAF
+
+## For the best performane you can expose application without NGINX 

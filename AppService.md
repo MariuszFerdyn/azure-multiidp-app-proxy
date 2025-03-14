@@ -123,23 +123,24 @@ e.g.: https://hybrid-proxy-appservice.azurewebsites.net/
 
 If something is not working, use DEFAULT_OVERRIDE_IP as IP like DEFAULT_OVERRIDE_IP=127.0.0.14.
 # Enjoy App Service Features
+- Authentication with multiple IDP
 - SSL Offloading is fully operational.
-- Autoscaling for peak performance is live.
+- Autoscaling for peak performance is live. You can autoscale/scale up the app service for better performance
 - Flexible Identity Provider Support: Simply authenticate against Entra ID and many other identity providers.
 - Even publish the site on the internet from your laptop.
 # Coming soon
-- Version for Container Apps
 - WAF from ModSecurity
 - Header-based single sign-on must be configured on your own via modification of template files: https://github.com/MariuszFerdyn/nginx-container-proxy/tree/main/config
+
 # Probelms
-## Performance
+## Performance (1)
 
-If you see performance problems cosider run multiple containers inside Azure App Service. There is no replica statement, so for each you need to create the App Service Slots and distribute trafic, like here:
+If you see performance problems cosider run multiple containers inside Azure App Service. There is no replica statement, so for each you need to create the App Service Slots and distribute trafic, like here, but it will not help so much:
 ```
-echo "Creating 7 deployment slots for $webAppName in $resourceGroupName..."
+echo "Creating 4 deployment slots for $webAppName in $resourceGroupName..."
 
-# Create 7 deployment slots
-for i in {1..7}
+# Create 4 deployment slots
+for i in {1..4}
 do
   echo "Creating slot${i}..."
   az webapp deployment slot create \
