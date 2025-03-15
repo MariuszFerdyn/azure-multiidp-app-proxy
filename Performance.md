@@ -1,17 +1,56 @@
-Results for a single instance of AppService (Premium v3 P1mv3). The test was conducted with 20 users on each of the 8 instances, totaling 160 users continuously browsing the site. Below is the image illustrating the results:
+# Azure Performance Testing Results
+
+## App Service Configuration
+
+We tested a single instance of App Service (Premium v3 P1mv3) with 160 concurrent users (20 users × 8 instances) continuously browsing the site.
 
 ![AppService1Instance-20usersx8](media/AppService1Instance-20usersx8.png)
 
+## Container Apps Configuration 1: Standard Setup
 
-Container Apps configured as follows: ContainerApp with 2 vCPU/4GB RAM ---->>>> ContainerAPP with azbridge 2 vCPU/4GB RAM --->>> Service Bus --->>> WebServer. This can be scalled to zero, so can be totally for free. There is also free tier. The test was conducted with 50 users on each of the 10 instances, totaling 500 users continuously browsing the site.
+We tested Container Apps with 500 concurrent users (50 users × 10 instances) continuously browsing the site.
+
+```
+┌─────────────────────┐    ┌─────────────────────────┐    ┌─────────────┐    ┌────────────┐
+│ Container App       │    │ Container App           │    │             │    │            │
+│                     │───>│ with azbridge           │───>│ Service Bus │───>│ WebServer  │
+│ (2 vCPU / 4GB RAM)  │    │ (2 vCPU / 4GB RAM)      │    │             │    │            │
+└─────────────────────┘    └─────────────────────────┘    └─────────────┘    └────────────┘
+```
+
+**Note:** This configuration can scale to zero, making it potentially free. There is also a free tier available.
 
 ![ContainerAppsWithNginxAzbridge](media/ContainerAppsWithNginxAzbridge.png)
 
-Container Apps configured as follows: ContainerApp with 2 vCPU/4GB RAM (autoscaling 0-15) ---->>>> ContainerAPP with azbridge 2 vCPU/4GB RAM --->>> Service Bus --->>> WebServer. The test was conducted with 50 users on each of the 10 instances, totaling 500 users continuously browsing the site.
+## Container Apps Configuration 2: With Autoscaling
+
+We tested Container Apps with autoscaling enabled and 500 concurrent users (50 users × 10 instances) continuously browsing the site.
+
+```
+┌─────────────────────────┐    ┌─────────────────────────┐    ┌─────────────┐    ┌────────────┐
+│ Container App           │    │ Container App           │    │             │    │            │
+│                         │───>│ with azbridge           │───>│ Service Bus │───>│ WebServer  │
+│ (2 vCPU / 4GB RAM)      │    │ (2 vCPU / 4GB RAM)      │    │             │    │            │
+│ [autoscaling: 0-15]     │    │                         │    │             │    │            │
+└─────────────────────────┘    └─────────────────────────┘    └─────────────┘    └────────────┘
+```
 
 ![ContainerAppsAutoScallingWithNginxAzbridge](media/ContainerAppsAutoScallingWithNginxAzbridge.png)
 
+## Container Apps Configuration 3: Direct Azbridge (Best Performance)
 
-You can reconfigure the Ingress controller to External and HTTPS for the azbridge container and route traffic directly to your web app. This configuration provides the best performance - 4266 requests/s per container, compared to Azure App Proxy's 750 per tenant! The infrastructure looks like: azbridge 2 vCPU/4GB RAM --->>> Service Bus --->>> WebServer. The test was conducted with 50 users on each of the 10 instances, totaling 500 users continuously browsing the site. In this configuration, for additional security, it is highly recommended to add Azure Frontdoor or Azure App Gateway.
+For the best performance, you can reconfigure the Ingress controller to External and HTTPS for the azbridge container and route traffic directly to your web app.
+
+```
+┌─────────────────────────┐    ┌─────────────┐    ┌────────────┐
+│ Container App           │    │             │    │            │
+│ with azbridge           │───>│ Service Bus │───>│ WebServer  │
+│ (2 vCPU / 4GB RAM)      │    │             │    │            │
+└─────────────────────────┘    └─────────────┘    └────────────┘
+```
+
+This configuration provides the best performance - **4266 requests/s per container**, compared to Azure App Proxy's 750 per tenant!
+
+**Security Recommendation:** For additional security with this configuration, it is highly recommended to add Azure Front Door or Azure App Gateway.
 
 ![ContainerAppsAzbridgeOnly](media/ContainerAppsAzbridgeOnly.png)
